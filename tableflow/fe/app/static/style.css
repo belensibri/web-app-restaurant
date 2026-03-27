@@ -1,0 +1,290 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --bg-color: #fff5f8;
+    --text-color: #5c4a52;
+    --card-bg: rgba(255, 255, 255, 0.85);
+    --primary: #ff85a2;
+    --primary-hover: #ff6b8e;
+    --danger: #ff6b6b;
+    --danger-hover: #ee5253;
+    --success: #20bf6b;
+    --border-color: #ffd6e0;
+    --nav-bg: rgba(255, 255, 255, 0.9);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Girly Glassmorphism Background */
+body::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 133, 162, 0.15) 0%, transparent 60%);
+    z-index: -1;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 15px rgba(255, 133, 162, 0.1);
+}
+
+.nav-brand {
+    font-size: 1.6rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #ff85a2, #c77dff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 1px;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    margin-left: 1.5rem;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--primary);
+}
+
+.container {
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.card {
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2.5rem;
+    max-width: 450px;
+    margin: 0 auto;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 10px 30px rgba(255, 133, 162, 0.15);
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h2, h3 {
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    color: #ff6b8e;
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+textarea {
+    width: 100%;
+    padding: 0.8rem;
+    background: #ffffff;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    color: var(--text-color);
+    font-family: inherit;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(255, 133, 162, 0.2);
+}
+
+button {
+    background: linear-gradient(135deg, #ff85a2 0%, #ff6b8e 100%);
+    color: #fff;
+    border: none;
+    padding: 0.8rem 1.8rem;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(255, 107, 142, 0.3);
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 142, 0.4);
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+button.btn-sm {
+    padding: 0.4rem 0.9rem;
+    font-size: 0.85rem;
+    width: auto;
+    background: #ffffff;
+    border: 2px solid var(--border-color);
+    color: var(--text-color);
+    box-shadow: none;
+}
+
+button.btn-sm:hover {
+    background: #fff0f5;
+    border-color: var(--primary);
+    color: var(--primary-hover);
+    transform: none;
+}
+
+button.btn-danger {
+    color: var(--danger);
+}
+button.btn-danger:hover {
+    background: var(--danger);
+    color: white;
+    border-color: var(--danger);
+}
+
+.table-container {
+    overflow-x: auto;
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 16px;
+    backdrop-filter: blur(16px);
+    margin-top: 1.5rem;
+    box-shadow: 0 8px 25px rgba(255, 133, 162, 0.1);
+    animation: fadeIn 0.5s ease-out;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 1.2rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+th {
+    background: rgba(255, 214, 224, 0.5);
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #ff6b8e;
+}
+
+tr:hover {
+    background: rgba(255, 133, 162, 0.04);
+}
+
+.badge {
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-block;
+}
+
+/* Girly badge colors */
+.status-received { background: #dcdde1; color: #353b48; }
+.status-preparing { background: #feca57; color: #fff; }
+.status-ready { background: #48dbfb; color: #fff; }
+.status-delivered { background: #1dd1a1; color: #fff; }
+.status-cancelled { background: #ff6b6b; color: #fff; }
+
+.bg-success { background: #1dd1a1; color: #fff; }
+.bg-danger { background: #ff6b6b; color: #fff; }
+
+.btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #ff85a2 0%, #ff6b8e 100%);
+    color: white;
+    padding: 0.7rem 1.4rem;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: none;
+    box-shadow: 0 4px 15px rgba(255, 107, 142, 0.3);
+}
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 142, 0.4);
+}
+
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #ffffff;
+    border: 2px solid var(--primary);
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(255, 133, 162, 0.25);
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 1000;
+    font-weight: 500;
+    color: var(--primary-hover);
+}
+
+.toast.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.toast.hidden {
+    pointer-events: none;
+}
+
+.flashes { margin-bottom: 1.5rem; }
+.flash {
+    padding: 1.2rem;
+    border-radius: 12px;
+    margin-bottom: 0.8rem;
+    animation: fadeIn 0.3s;
+    font-weight: 500;
+}
+.flash.success { background: #e8f8f5; border: 2px solid #1dd1a1; color: #10ac84; }
+.flash.error { background: #ffeded; border: 2px solid #ff6b6b; color: #ee5253; }

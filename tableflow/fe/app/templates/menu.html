@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Menu Catalog</h2>
+<a href="{{ url_for('add_menu_item') }}" class="btn">Add New Item</a>
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Availability</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.category }}</td>
+                <td>${{ item.price }}</td>
+                <td>
+                    {% if item.is_available %}
+                        <span class="badge bg-success">Available</span>
+                    {% else %}
+                        <span class="badge bg-danger">Unavailable</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <form method="POST" action="{{ url_for('toggle_availability', item_id=item.id) }}">
+                        <button type="submit" class="btn-sm">Toggle Availability</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>All Orders</h2>
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Table</th>
+                <th>Waiter ID</th>
+                <th>Status</th>
+                <th>Total</th>
+                <th>Created At</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.table_number }}</td>
+                <td>{{ order.waiter_id }}</td>
+                <td><span class="badge status-{{ order.status }}">{{ order.status }}</span></td>
+                <td>${{ order.total_amount }}</td>
+                <td>{{ order.created_at[:16] }}</td>
+                <td>
+                    <form method="POST" action="{{ url_for('update_order_status', order_id=order.id) }}" style="display:inline;">
+                        <input type="hidden" name="status" value="preparing">
+                        <button type="submit" class="btn-sm">Mark Preparing</button>
+                    </form>
+                    <form method="POST" action="{{ url_for('update_order_status', order_id=order.id) }}" style="display:inline;">
+                        <input type="hidden" name="status" value="ready">
+                        <button type="submit" class="btn-sm">Mark Ready</button>
+                    </form>
+                    <form method="POST" action="{{ url_for('update_order_status', order_id=order.id) }}" style="display:inline;">
+                        <input type="hidden" name="status" value="delivered">
+                        <button type="submit" class="btn-sm">Mark Delivered</button>
+                    </form>
+                    <form method="POST" action="{{ url_for('update_order_status', order_id=order.id) }}" style="display:inline;">
+                        <input type="hidden" name="status" value="cancelled">
+                        <button type="submit" class="btn-sm btn-danger">Cancel</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

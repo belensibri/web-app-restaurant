@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TableFlow</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav>
+        <div class="nav-brand">TableFlow</div>
+        <div class="nav-links">
+            {% if session.get('token') %}
+                <a href="{{ url_for('dashboard') }}">Dashboard</a>
+                <a href="{{ url_for('menu') }}">Menu</a>
+                <a href="{{ url_for('orders') }}">All Orders</a>
+                <a href="{{ url_for('logout') }}">Logout ({{ session.get('username') }})</a>
+            {% else %}
+                <a href="{{ url_for('login') }}">Login</a>
+                <a href="{{ url_for('register') }}">Register</a>
+            {% endif %}
+        </div>
+    </nav>
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flashes">
+                    {% for category, message in messages %}
+                        <div class="flash {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        
+        <div id="notification-toast" class="toast hidden"></div>
+        
+        {% block content %}{% endblock %}
+    </div>
+
+    {% if session.get('token') %}
+    <script>
+        const token = "{{ session.get('token', '') }}";
+        if (token) {
+            const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
+            const wsUrl = "ws://localhost:8000/ws/notifications?token=" + encodeURIComponent(token);
+            const ws = new WebSocket(wsUrl);
+            
+            ws.onmessage = function(event) {
+                const toast = document.getElementById("notification-toast");
+                try {
+                    const data = JSON.parse(event.data);
+                    toast.innerText = data.title;
+                    toast.classList.remove("hidden");
+                    toast.classList.add("show");
+                    setTimeout(() => {
+                        toast.classList.remove("show");
+                        toast.classList.add("hidden");
+                    }, 4000);
+                } catch(e) {}
+            };
+        }
+    </script>
+    {% endif %}
+</body>
+</html>
